@@ -12,5 +12,5 @@ data class Product(
     val price: Double,
     val rating: Rating,
     val title: String,
-    val isInWishlist: Boolean,
+    var isInWishlist: Boolean,
 ): Parcelable

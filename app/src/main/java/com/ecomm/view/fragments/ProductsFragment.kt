@@ -84,7 +84,11 @@ class ProductsFragment : Fragment(), ItemClickListener<Product> {
     }
 
     override fun onFavClick(item: Product) {
-
+        if(item.isInWishlist){
+            //add to db
+        }else{
+            //remove from db
+        }
     }
 
 

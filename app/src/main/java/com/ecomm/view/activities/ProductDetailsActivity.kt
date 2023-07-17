@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.ecomm.R
 import com.ecomm.databinding.ActivityProductDetailsBinding
 import com.ecomm.models.Product
+import com.ecomm.utils.Constants
 import com.ecomm.utils.Constants.PRODUCT
 import com.ecomm.utils.Constants.parcelable
 
@@ -40,7 +41,19 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener { finish() }
 
         if(receivedProduct.isInWishlist){
+           Constants.selectFav( binding.favBtn, this)
+        }
 
+        binding.favBtn.setOnClickListener {
+            if(receivedProduct.isInWishlist){
+                receivedProduct.isInWishlist = false
+                Constants.unselectFav( binding.favBtn, this)
+                //remove to db
+            }else{
+                //add from db
+                receivedProduct.isInWishlist = true
+                Constants.selectFav( binding.favBtn, this)
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import com.ecomm.ItemClickListener
 import com.ecomm.R
 import com.ecomm.databinding.AdapterProductBinding
 import com.ecomm.models.Product
+import com.ecomm.utils.Constants
 
 class ProductsAdapter(onProductClickListener: ItemClickListener<Product>) :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
@@ -57,8 +58,23 @@ class ProductsAdapter(onProductClickListener: ItemClickListener<Product>) :
 
                //check db to init fav icon
 
-                binding.fav.setOnClickListener {
+                if(product.isInWishlist){
+                    Constants.selectFav(binding.fav, root.context)
+                }else{
+                    Constants.unselectFav(binding.fav, root.context)
+                }
 
+                binding.fav.setOnClickListener {
+                    if(product.isInWishlist){
+                        product.isInWishlist = false
+                        Constants.unselectFav(binding.fav, root.context)
+                    }else{
+                        product.isInWishlist = true
+                        Constants.selectFav(binding.fav, root.context)
+                    }
+
+                    notifyItemChanged(adapterPosition)
+                    onProductClickListener?.onFavClick(product)
                 }
 
                 binding.root.setOnClickListener {
