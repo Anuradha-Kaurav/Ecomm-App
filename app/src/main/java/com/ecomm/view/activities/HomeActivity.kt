@@ -1,4 +1,4 @@
-package com.ecomm.view
+package com.ecomm.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

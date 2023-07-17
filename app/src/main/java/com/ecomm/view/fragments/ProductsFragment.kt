@@ -1,5 +1,6 @@
 package com.ecomm.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ecomm.ItemClickListener
-import com.ecomm.R
 import com.ecomm.databinding.FragmentProductsBinding
 import com.ecomm.models.Product
-import com.ecomm.view.HomeActivity
+import com.ecomm.utils.Constants.PRODUCT
+import com.ecomm.view.activities.HomeActivity
+import com.ecomm.view.activities.ProductDetailsActivity
 import com.ecomm.view.adapters.ProductsAdapter
 import com.ecomm.viewmodel.HomeViewModel
 import com.ecomm.viewmodel.HomeViewModelFactory
@@ -76,7 +78,9 @@ class ProductsFragment : Fragment(), ItemClickListener<Product> {
     }
 
     override fun onItemClick(item: Product) {
-
+        val intent = Intent(context, ProductDetailsActivity::class.java)
+        intent.putExtra(PRODUCT, item)
+        startActivity(intent)
     }
 
     override fun onFavClick(item: Product) {

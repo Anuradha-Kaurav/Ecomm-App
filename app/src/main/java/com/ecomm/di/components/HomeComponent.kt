@@ -1,7 +1,7 @@
 package com.ecomm.di.components
 
 import com.ecomm.di.ActivityScope
-import com.ecomm.view.HomeActivity
+import com.ecomm.view.activities.HomeActivity
 import com.ecomm.view.fragments.FavoritesFragment
 import com.ecomm.view.fragments.ProductsFragment
 import dagger.Subcomponent

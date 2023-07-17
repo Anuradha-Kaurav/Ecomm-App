@@ -8,7 +8,6 @@ import com.ecomm.ItemClickListener
 import com.ecomm.R
 import com.ecomm.databinding.AdapterProductBinding
 import com.ecomm.models.Product
-import java.lang.StringBuilder
 
 class ProductsAdapter(onProductClickListener: ItemClickListener<Product>) :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
@@ -60,6 +59,10 @@ class ProductsAdapter(onProductClickListener: ItemClickListener<Product>) :
 
                 binding.fav.setOnClickListener {
 
+                }
+
+                binding.root.setOnClickListener {
+                    onProductClickListener?.onItemClick(product)
                 }
             }
     }
