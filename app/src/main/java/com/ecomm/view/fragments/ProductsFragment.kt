@@ -66,8 +66,37 @@ class ProductsFragment : Fragment(), ItemClickListener<Product> {
     }
 
     private fun fetchViewModel() {
+        homeViewModel.getAllProducts()
         homeViewModel.productsLiveData.observe(this, Observer {
             productsList = it.toMutableList()
+            checkAndUpdateProducts()
+        })
+    }
+
+    private fun checkAndUpdateProducts() {
+        homeViewModel.isDataExists()
+        homeViewModel.isExistsLiveData.observe(this, Observer {
+            if(it){
+                getAllFavProductUpdates()
+            }else{
+                adapter.setProductList(productsList)
+            }
+        })
+    }
+
+    private fun getAllFavProductUpdates() {
+        homeViewModel.getFavProducts()
+        homeViewModel.favProductsListLiveData.observe(this, Observer { product ->
+            product.forEach() firstLoop@ {
+                productsList.forEach() { item ->
+                    run {
+                        if(item.id == it.id){
+                            item.isInWishlist = true
+                            return@firstLoop
+                        }
+                    }
+                }
+            }
             adapter.setProductList(productsList)
         })
     }
@@ -86,10 +115,10 @@ class ProductsFragment : Fragment(), ItemClickListener<Product> {
     override fun onFavClick(item: Product) {
         if(item.isInWishlist){
             //add to db
+            homeViewModel.addFavProduct(item)
         }else{
             //remove from db
+            homeViewModel.deleteFavProduct(item)
         }
     }
-
-
 }

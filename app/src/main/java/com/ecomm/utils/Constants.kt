@@ -12,6 +12,7 @@ object Constants {
 
     const val BASE_URL = "https://fakestoreapi.com/"
     const val PRODUCT = "product"
+    const val DB_NAME = "ProductsDB"
 
     inline fun <reified  T : Parcelable> Intent.parcelable(key : String): T? = when {
         SDK_INT >=33 -> getParcelableExtra(key, T::class.java)
